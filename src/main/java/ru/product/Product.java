@@ -4,18 +4,18 @@ public class Product {
 
     private String name;
 
-    private double price;
-
     private String category;
 
-    private String id;
+    private String brand;
+
+    private double price;
 
 
-    public Product(String name, double price, String category, String id) {
+    public Product(String name, double price, String category, String brand) {
         this.name = name;
         this.price = price;
         this.category = category;
-        this.id = id;
+        this.brand = brand;
     }
 
     public String getName() {
@@ -42,12 +42,12 @@ public class Product {
         this.category = category;
     }
 
-    public String getId() {
-        return id;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Product {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", category='" + category + '\'' +
-                ", id='" + id + '\'' +
+                ", brand='" + brand + '\'' +
                 '}';
     }
 }

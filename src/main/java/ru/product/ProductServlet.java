@@ -58,9 +58,9 @@ import java.util.Map;
             String pName = request.getParameter("name");
             String pCategory = request.getParameter("category");
             String pPrice = request.getParameter("price");
-            String pId = request.getParameter("id");
+            String pbrand = request.getParameter("brand");
 
-            Product product = new Product(pName, Double.valueOf(pPrice), pCategory,pId);
+            Product product = new Product(pName, Double.valueOf(pPrice), pCategory,pbrand);
             ProductService.add(product);
 
             response.getWriter().append("<html><head>\n" +
