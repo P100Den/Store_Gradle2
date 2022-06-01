@@ -24,7 +24,7 @@ public class RemoveProductFromBasketServlet extends HttpServlet {
         }
 
         // TODO: Refactor!
-        response.sendRedirect("http://localhost:8082/viewBasket");
+        response.sendRedirect("http://localhost:8080/viewBasket");
     }
 }
 
