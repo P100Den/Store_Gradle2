@@ -26,7 +26,7 @@ public class Catalog extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-     request.setAttribute("catalog",products.get(products));
+        request.setAttribute("catalog",products.get(products));
      request.getRequestDispatcher("/catalog.jsp").forward(request,response);
     }
 }

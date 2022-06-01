@@ -15,6 +15,12 @@ dependencies {
     compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation 'mysql:mysql-connector-java:8.0.29'
+    // https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api
+    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+    // https://mvnrepository.com/artifact/jstl/jstl
+    implementation 'jstl:jstl:1.2'
+
+
 
 }
 
