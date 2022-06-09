@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Форма удаления продукта</h1>
+
+
+<div>
+    <form action="/productDelete" method="post">
+        <label for="barcode">Введите штрих код товара для удаления:</label><br>
+        <input type="text" id="barcode" name="barcode"><br>
+        <br><br>
+        <input type="submit" value="Submit"><br>
+        <input type="button" onclick="history.back();" value="Назад"/><br>
+    </form>
+</div>
+
+
+</body>
+</html>

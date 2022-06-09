@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Форма редактирования клиентов</h1>
+
+
+<div>
+    <form action="/editingClients" method="post">
+        <label for="name">Введите имя клиента для которого будут применены изменения :</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="authenticationNumber">Введите новый номер:</label><br>
+        <input type="text" id="authenticationNumber" name="authenticationNumber"><br>
+
+        <input type="submit" value="Submit"><br>
+        <input type="button" onclick="history.back();" value="Назад"/><br>
+    </form>
+</div>
+
+
+</body>
+</html>

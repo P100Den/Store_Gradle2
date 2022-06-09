@@ -1,36 +1,43 @@
 
 import ru.product.Product;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 
 public class TestDBConnect {
 
+    public static final Connection CONNECTION = getConnection();
+
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
+
+
         Connection connection = null;
         try{
-           connection = getConnection();
+           connection = CONNECTION;
 
-            Product p = new Product("Fanta",100,"Drinks","Cola");
-            createNewProduct(connection, p);
+            //Product p = new Product("Cola","Drink","Green","Pepsi",10);
+            //  deleteProduct(connection,125);
+           // updateProduct(connection,"Fanta",120);
+            //deleteClients(connection,63);
 
         }finally {
             if (connection!=null)
                 connection.close();
         }
-    }
+        }
 
-    private static void createNewProduct(Connection connection , Product p) throws SQLException {
+    private static void deleteClients(Connection connection ,  int authenticationNumber ) throws SQLException {
         Statement st = connection.createStatement();
-        st.executeUpdate("INSERT INTO products (name ,price) VALUES (\""+ p.getName() + "\"," + (int) p.getPrice() +");");
+        String query = ("DELETE FROM clients WHERE authenticationNumber =" + authenticationNumber );
+        System.out.println(query);
+        int row = st.executeUpdate(query);
+        System.out.println(row);
     }
 
 

@@ -8,10 +8,13 @@
 <form action="userPersonForm.jsp">
 Name: <input name="name" />
 <br><br>
-Age: <input name="age" type="number" min=1 />
+Age: <input name="password" type="password" min=1 />
 <br></br>
 <input type="submit" value="Submit" />
 </form>
-<p><a href="./">Home page</a>  </p>
+
+<jsp:include page="returnBack.jsp" />
+
+
 </body>
 </html>

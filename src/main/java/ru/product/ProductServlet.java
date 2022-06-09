@@ -57,10 +57,11 @@ import java.util.Map;
 
             String pName = request.getParameter("name");
             String pCategory = request.getParameter("category");
+            String pColour = request.getParameter("colour");
+            String pBrand = request.getParameter("brand");
             String pPrice = request.getParameter("price");
-            String pbrand = request.getParameter("brand");
-
-            Product product = new Product(pName, Double.valueOf(pPrice), pCategory,pbrand);
+            String pBarcode= request.getParameter("barcode");
+            Product product = new Product(pName, pCategory, pColour, pBrand, Double.valueOf(pPrice),Double.valueOf(pBarcode));
             ProductService.add(product);
 
             response.getWriter().append("<html><head>\n" +
