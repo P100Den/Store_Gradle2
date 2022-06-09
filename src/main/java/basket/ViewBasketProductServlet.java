@@ -13,8 +13,10 @@ public class ViewBasketProductServlet extends HttpServlet {
 
     public static final String TABLE_BEGIN = "<table style=\" border: 1px solid white;   border-collapse: collapse;\">\n" +
             "  <tr>\n" +
-            "    <th>Product name</th>\n" +
-            "    <th>Product category</th> \n" +
+            "    <th>Name</th>\n" +
+            "    <th>Category</th> \n" +
+            "    <th>Colour</th> \n" +
+            "    <th>Brand</th>\n" +
             "    <th>Price</th>\n" +
             "    <th>Remove</th>\n" +
             "  </tr>";
@@ -39,7 +41,9 @@ public class ViewBasketProductServlet extends HttpServlet {
                 response.getWriter().append("<tr>\n" +
                         "    <td>" + p.getName() + "</td>\n" +
                         "    <td>" + p.getCategory() + "</td> \n" +
-                        "    <td>" +p.getPrice()  + "</td>\n" +
+                        "    <td>" + p.getColour() + "</td> \n" +
+                        "    <td>" + p.getBrand() + "</td>\n" +
+                        "    <td>" + p.getPrice() + "</td>\n" +
                         "    <td><a href= \"./remove?id=" + i + "\">Remove</a></td>\n" +
                         "  </tr>");
             }

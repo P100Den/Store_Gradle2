@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Форма добавления клиентов</h1>
+
+
+<div>
+    <form action="/clientsAdd" method="post">
+        <label for="name">Имя клиента:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Емейл:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="password">Пароль:</label><br>
+        <input type="text" id="password" name="password"><br>
+        <label for="authenticationNumber">Идентификационный номер:</label><br>
+        <input type="text" id="authenticationNumber" name="authenticationNumber"><br>
+        <input type="submit" value="Submit"><br>
+        <input type="button" onclick="history.back();" value="Назад"/><br>
+    </form>
+</div>
+
+
+</body>
+</html>

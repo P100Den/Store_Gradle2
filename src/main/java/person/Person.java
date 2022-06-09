@@ -1,37 +1,37 @@
 package person;
 
 public class Person {
-    private String id;
-    private String fio;
-    private int age;
+    private String firstName;
+    private String password;
 
-    public Person(String id, String fio, int age) {
-        this.id = id;
-        this.fio = fio;
-        this.age = age;
+    public Person(String firstName,String password){
+        this.firstName = firstName;
+        this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getFio() {
-        return fio;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + password + '\'' +
+                ", fio='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
 }

@@ -1,14 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>User Info</title>
+<meta charset="UTF-8">
+<title>JSP Application</title>
 </head>
 <body>
-<p>Name: <%= request.getParameter("name") %></p>
-<p>Age: <%= request.getParameter("age") %></p>
+ <h2>Your entered data:</h2>
+    <p>Name: <%= request.getParameter("name") %></p>
+    <p>Password: <%= request.getParameter("password") %></p>
 
-<p><a href=".\userPersonSendForm.jsp">Register!</a></p>
-<p><a href="./">Home page</a>  </p>
+
+<jsp:include page="returnBack.jsp" />
+
 </body>
 </html>

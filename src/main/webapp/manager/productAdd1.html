@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Форма добавления продукта</h1>
+
+
+<div>
+    <form action="/productAdd1" method="post">
+        <label for="name">Имя продукта:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="category">Категория:</label><br>
+        <input type="text" id="category" name="category"><br>
+        <label for="colour">цвет:</label><br>
+        <input type="text" id="colour" name="colour"><br>
+        <label for="brand">бренд:</label><br>
+        <input type="text" id="brand" name="brand"><br>
+        <label for="price">Цена:</label><br>
+        <input type="text" id="price" name="price"><br>
+        <label for="barcode">Штрих код:</label><br>
+        <input type="text" id="barcode" name="barcode"><br>
+        <input type="submit" value="Submit"><br>
+        <input type="button" onclick="history.back();" value="Назад"/><br>
+    </form>
+</div>
+</body>
+</html>

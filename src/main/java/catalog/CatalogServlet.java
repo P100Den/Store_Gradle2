@@ -1,5 +1,7 @@
 package catalog;
 
+import help.ServletHelper;
+import ru.product.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,70 +9,145 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
-@WebServlet(urlPatterns = "/catalog")
+@WebServlet(urlPatterns = "/catalogServlet")
 public class CatalogServlet extends HttpServlet {
 
-    public static final String URL = "url";
-    public static final String USERNAME = "username";
-    public static final String PASSWORD = "password";
-    public static final String COM_MYSQL_CJ_JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    Connection connection = null;
+    public static final Connection CONNECTION = getConnection();
+    public static final String TABLE_BEGIN = "<table style=\" border: 1px solid white;   border-collapse: collapse;\">\n" +
+            "  <tr>\n" +
+            "    <th>Name</th>\n" +
+            "    <th>Category</th> \n" +
+            "    <th>Colour</th> \n" +
+            "    <th>Brand</th>\n" +
+            "    <th>Price</th>\n" +
+            "    <th>Barcode</th>\n" +
+            "    <th>Remove</th>\n" +
+            "  </tr>";
+    public static final String TABLE_END = "</table>";
+
     @Override
-    public void init() throws ServletException {
-        super.init();
-            try {
-                Class.forName(COM_MYSQL_CJ_JDBC_DRIVER);
-                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-            }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> selectProducts = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = CONNECTION;
+            Statement st = connection.createStatement();
+            ResultSet resultSet = st.executeQuery("SELECT NAME, Category,Colour,Brand,Price,Barcode FROM products");
 
-        }
-        public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            while (resultSet.next()){
+                String productName = resultSet.getString(1);
+                String productCategory = resultSet.getString(2);
+                String productColour = resultSet.getString(3);
+                String productBrand = resultSet.getString(4);
+                int productPrice = resultSet.getInt(5);
+                int productBarcode = resultSet.getInt(6);
+                selectProducts.add(new Product(productName,productCategory,productColour,productBrand,productPrice,productBarcode));
 
-            try {
-                response.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = response.getWriter();
-
-                out.println("<html><body>");
-                out.println("<h3>Catalog</h3>");
-                out.println("<table border=1><tr>" + "<td><b>S.No</b></td>" + "<td><b>Name</b></td>"
-                        + "<td><b>Category</b></td>" + "<td><b>Brand</b></td>" + "<td><b>Price</b></td></tr>");
-
-                Statement stmt = connection.createStatement();
-                ResultSet resultSet = stmt.executeQuery("SELECT NAME, Category,Brand,Price FROM products");
-
-                while (resultSet.next()) {
-                    String name = resultSet.getString("Name");
-                    String category = resultSet.getString("Category");
-                    String brand = resultSet.getString("Brand");
-                    int price = resultSet.getInt("Price");
-
-                    out.println("<tr>" + "<td>" + name + "</td>" + "<td>" + category + "</td>" + "<td>" + brand + "</td>"
-                            + "<td>" + price
-                            + "</td></tr>");
-
+               if (selectProducts!=null) {
+                    response.getWriter().append(TABLE_BEGIN);
+                    response.getWriter().append("<tr>\n" +
+                                "    <td>" + productName + "</td>\n" +
+                                "    <td>" + productCategory + "</td> \n" +
+                                "    <td>" + productColour + "</td> \n" +
+                                "    <td>" + productBrand + "</td>\n" +
+                                "    <td>" + productPrice + "</td>\n" +
+                                "    <td>" + productBarcode + "</td>\n" +
+                                "<td><a href= \"./addToBasket?name="  + productName + "\">Add to basket</a></td>\n" +
+                                "  </tr>");
+                    response.getWriter().append(TABLE_END);
+                }else {
+                    response.getWriter().append("<p>Our catalog is Empty!</p>");
                 }
-                out.println("</table></body></html>");
-                resultSet.close();
-                stmt.close();
-                out.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                ServletHelper.populateHtmlEnd(response);
             }
-        }
-        public void destroy() {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
+        }
+
+
+    private static Connection getConnection() {
+
+        Properties props = getProperties();
+
+        String url = props.getProperty("url");
+
+        String username = props.getProperty("username");
+
+        String password = props.getProperty("password");
+
+        try {Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+
+            Connection connection =
+
+                    DriverManager.getConnection(url, username, password);
+
+            System.out.println("Connection successful!");
+
+            return connection;
+
+        } catch (Exception ex){
+            System.out.println("Connection failed...");
+            System.out.println(ex);
+        }
+        return null;
     }
+
+
+
+    private static Properties getProperties() {
+        Properties props = new Properties();
+
+        try(InputStream in = Files.newInputStream(Paths.get("src/main/resources/database.properties"))){
+            props.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return props;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
